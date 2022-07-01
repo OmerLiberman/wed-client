@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
 import { Button, TextField, ThemeProvider, Typography } from '@mui/material'
 import { createTheme } from '@mui/material/styles';
 import useWindowSize from 'react-use/lib/useWindowSize'
@@ -15,7 +14,9 @@ const theme = createTheme({
 const Main = () => {
   const { width, height } = useWindowSize();
   
-  const {id} = useParams();
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const id = params.get('id');
 
   const [attenderKnownName, setAttenderKnownName] = useState('');
   const [hasSavedAnswer, setHasSavedAnswer] = useState(undefined);
