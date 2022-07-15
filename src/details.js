@@ -19,7 +19,7 @@ export const Details = () => {
     <div>
       <div> יום שני, י״ח באב התשפ״ב </div>
       <div> 
-        <Typography variant="h5">
+        <Typography variant="h5" fontFamily="Heebo">
           22 | 8 | 15 
         </Typography>
       </div>
@@ -31,12 +31,12 @@ export const Details = () => {
       </Typography>
     </div>
 
-    <div>
+    <div style={{fontFamily: "Heebo"}}>
       <div> קבלת פנים - 19:15 </div>
       <div> חופה וקידושין - 20:00 </div>
     </div>
 
-    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', fontFamily: "Heebo"}}>
       <div style={{display: 'flex', flexDirection: 'column'}}>
         <div> <b> הורי הכלה</b> </div>
         <div> רותי ועופר</div>

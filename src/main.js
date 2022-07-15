@@ -15,7 +15,6 @@ import {Details} from './details';
 import {OurImage} from './our_image';
 import {Buttons} from './buttons';
 import {InviteModal} from './modal';
-import {KosherAccordion} from './kosher_accordion';
 
 
 const theme = createTheme({
@@ -56,7 +55,6 @@ const Main = () => {
   const [come, setCome] = useState(undefined);
   const [saved, setSaved] = useState(undefined);
   const [modalOpen, setModalOpen] = useState(false);
-  const [kosher, setKosher] = useState([]);
   const [error, setError] = useState(true);
 
   const knownUserClickHandler = (status) => {
@@ -66,7 +64,6 @@ const Main = () => {
         attendies: status === 'No' ? 0 : invitees,
         recognized: isRecognized,
         status,
-        kosher, 
       })
       .then(res => {
         if (res.status === 200) {
@@ -79,13 +76,15 @@ const Main = () => {
   }
 
   const unknownUserClickHandler = (status) => {
+    if (name === '' || phone === '') {
+      setError('חובה להזין שם וטלפון');
+    }
     axios.post('http://142.93.161.46:3001/api/attendies', {
         name,
         phone,
         attendies: status === 'No' ? 0 : invitees,
         recognized: isRecognized,
         status,
-        kosher,
       })
       .then(res => {
         if (res.status === 200) {
@@ -118,12 +117,6 @@ const Main = () => {
       status: '',
     })
   }
-  
-  const handleAddKosher = (kosherType) => {
-    const koshers = kosher;
-    koshers.push(kosherType)
-    setKosher(koshers);
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -143,7 +136,7 @@ const Main = () => {
         {
           attenderKnownName &&
             <div>
-              <Typography variant="h5">
+              <Typography variant="h5" fontFamily="Heebo">
                 היי {attenderKnownName} !
               </Typography>
             </div>
@@ -163,7 +156,7 @@ const Main = () => {
         {
           saved && come ? 
             <div>
-              <Typography variant="h5">
+              <Typography variant="h5" fontFamily="Heebo">
                 {
                     invitees > 1 ?
                     "מחכים לראותכם!"
@@ -174,19 +167,19 @@ const Main = () => {
             </div>
           : saved && !come ?
               <div>
-                <Typography variant="h5">
+                <Typography variant="h5" fontFamily="Heebo">
                     תשובתך נשמרה!
                 </Typography>
               </div>
           : hasSavedAnswer ?
             <div>
-              <Typography variant="h5">
+              <Typography variant="h5" fontFamily="Heebo">
                 תשובה רשומה במערכת!
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="h6" fontFamily="Heebo">
                 תרצה לשנות אותה?
               </Typography>
-              <div style={{padding: 20}}>
+              <div style={{padding: 20, fontFamily: "Heebo"}}>
                 <Button variant="contained" color="success" style={{marginLeft: 10}} onClick={() => onDeletePrevResponseClick()}>
                   מחק תשובה קודמת
                 </Button>
@@ -194,7 +187,7 @@ const Main = () => {
             </div>
           :
             <div>
-              <Typography variant="h5">
+              <Typography variant="h5" fontFamily="Heebo">
                     אישור הגעה
               </Typography>
               <div> נשמח לראותכם בין אורחינו </div>
@@ -209,7 +202,7 @@ const Main = () => {
                     </div>
                   </>
               }
-              <div style={{marginTop: 8}}>
+              <div style={{marginTop: 8, fontFamily: "Heebo"}}>
                 <Typography variant="h6">
                   מספר מגיעים
                 </Typography>
@@ -217,14 +210,19 @@ const Main = () => {
                   <Fab color="warning">
                     <AddIcon onClick={() => setInvitees(prev => Math.min(prev + 1, 10))} />
                   </Fab>
-                  <Typography variant='h5'> {invitees} </Typography>
+                  <Typography variant='h5' fontFamily="Heebo"> {invitees} </Typography>
                   <Fab color="warning">
                     <RemoveIcon onClick={() => setInvitees(prev => Math.max(prev - 1, 1))} />
                   </Fab>
                 </div>
               </div>
 
-              <KosherAccordion onAddKosher={handleAddKosher} />
+              <div>
+                {
+                  error && 
+                    <Typography fontFamily="Heebo" color="red"> {error}</Typography>
+                }
+              </div>
 
               <Buttons onClick={onClick}/>
             </div>
