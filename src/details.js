@@ -12,7 +12,7 @@ export const Details = () => {
         <b> מתחתנים </b>
       </Typography>
       <div style={{marginTop: '10px'}}> 
-        התרגשות גדולה להמזינכם לחגוג עמנו את היום המאושר שלנו
+        שמחים להזמינכם לחגוג עמנו
       </div>
     </div>
 

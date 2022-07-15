@@ -76,8 +76,8 @@ const Main = () => {
   }
 
   const unknownUserClickHandler = (status) => {
-    if (name === '' || phone === '') {
-      setError('חובה להזין שם וטלפון');
+    if (name === '') {
+      setError('חובה להזין שם');
     }
     axios.post('http://142.93.161.46:3001/api/attendies', {
         name,
