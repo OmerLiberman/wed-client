@@ -50,5 +50,8 @@
   },
   "peerDependencies": {
     "react-spring": "^8.x"
+  },
+  "devDependencies": {
+    "webpack-pwa-manifest": "^4.3.0"
   }
 }
